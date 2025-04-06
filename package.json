@@ -10,6 +10,8 @@
     "lint-fix": "next lint --fix"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.1.6",
+    "@tanstack/react-query": "^5.71.10",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.487.0",
