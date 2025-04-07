@@ -1,4 +1,4 @@
-'use client';
+import * as React from "react"
 
 import {
   Select,
@@ -8,26 +8,34 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
-const FilterByRegoin = () => {
+interface FilterByRegionProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const FilterByRegion: React.FC<FilterByRegionProps> = ({ value, onChange }) => {
+  const regions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
+
   return (
-    <Select>
+    <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder="Filter by Region" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
-          <SelectItem value="apple">Apple</SelectItem>
-          <SelectItem value="banana">Banana</SelectItem>
-          <SelectItem value="blueberry">Blueberry</SelectItem>
-          <SelectItem value="grapes">Grapes</SelectItem>
-          <SelectItem value="pineapple">Pineapple</SelectItem>
+          <SelectLabel>Regions</SelectLabel>
+          <SelectItem value="test-for-now">All Regions</SelectItem>
+          {regions.map((region) => (
+            <SelectItem key={region} value={region}>
+              {region}
+            </SelectItem>
+          ))}
         </SelectGroup>
       </SelectContent>
     </Select>
-  )
-}
+  );
+};
 
-export default FilterByRegoin;
+export default FilterByRegion;

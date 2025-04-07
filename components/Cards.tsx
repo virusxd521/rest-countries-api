@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Card,
   CardContent,
@@ -8,41 +6,37 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { fetchCountries } from "@/services/countries";
-import { useQuery } from '@tanstack/react-query';
 
-const Cards = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['countries'],
-    queryFn: fetchCountries,
-  });
+interface Country {
+  name: string;
+  region: string;
+  capital: string;
+  population: number;
+}
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching data: {error.message}</p>;
+interface CardsProps {
+  countries: Country[];
+}
 
-  // TODO: add key
-  // TODO: add context for searching  and filtering
+const Cards: React.FC<CardsProps> = ({ countries }) => {
   return (
     <>
-      {
-        data?.length > 0 && data.map((country: any) => (
-          <Card>
-            <CardHeader>
-              <CardTitle>{country.name}</CardTitle>
-              <CardDescription>{country.region}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Capital: {country.capital}</p>
-              <p>Population: {country.population}</p>
-            </CardContent>
-            <CardFooter>
-            </CardFooter>
-          </Card>
-        ))
-      }
+      {countries?.map((country) => (
+        <Card key={country.name}>
+          <CardHeader>
+            <CardTitle>{country.name}</CardTitle>
+            <CardDescription>{country.region}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p>Capital: {country.capital}</p>
+            <p>Population: {country.population}</p>
+          </CardContent>
+          <CardFooter>
+          </CardFooter>
+        </Card>
+      ))}
     </>
-
-  )
-}
+  );
+};
 
 export default Cards;
