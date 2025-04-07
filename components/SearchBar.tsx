@@ -1,17 +1,21 @@
-'use client';
+"use client";
 
 import { Input } from "@/components/ui/input";
 
-// TODO: add event for handling search input
-const SearchBar = () => {
+interface SearchBarProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-  const inputChaning = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  }
-
+const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
   return (
-    <Input onChange={inputChaning} type="text" placeholder="Search for a country..." />
-  )
+    <Input
+      type="text"
+      placeholder="Search for a country..."
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
+  );
 };
 
 export default SearchBar;
